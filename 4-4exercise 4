@@ -1,0 +1,79 @@
+# Exercise 4
+# Create a game where the computer picks a random word and the player has to guess that word.
+# The computer tells the player how many letters are in the word.
+# Then the player gets five chances to ask if a letter is in the word.
+# The computer can only respond with "yes" or "no".
+# Then, the player must guess the word
+
+#Pseudocode
+
+#Create all variables
+#Create word database
+
+#User interface greeting with rules
+
+#Initialize game loop
+
+##Choose word
+##Initialize guessing loop for letter guessing
+###Input letter guess, restate current word with solved letters X5
+###Escape letter guessing loop
+
+##Restate current word with solved letters
+##Input guess
+##if guess correct then congratulations
+##if guess incorrect then show word
+
+##Ask for new game yes = return to beginning of loop no = escape
+
+#Farewell message
+import random
+dictionary = ("apple", "banana", "corn", "date", "egg", "fish", "grape", "hamburger", "ice", "juice", "konbu",
+                "leek", "milk", "noodle", "orange", "popcorn", "quesadilla", "rice", "soup", "turnip", "udon",
+                "vitamin", "water", "xorbate", "yam", "zipzopzippity")
+letter = ""
+guess = ""
+word = ""
+hint = ""
+tries = 0
+game = 0
+newgame = 0
+
+print("""
+Welcome to the ingestible word quiz!
+All these things can go in your body!
+
+You will have 5 free letter guesses to check the word,
+then you will have one final guess to solve.
+""")
+input("Press enter to begin")
+
+game = 1
+while game:
+    hint = ""
+    word = random.choice(dictionary)
+    for letter in word:
+        hint += "#"
+    print("Your word is:", hint)
+    guessloop = 1
+    while guessloop:
+        letter = input("Dear food wizard, does the word contain the letter ")
+        if letter.lower() in word:
+            print("Yes")
+        else:
+            print("No")
+        tries += 1
+        if tries == 5:
+            guess = input("You had your 5 clues, what is your guess?  ")
+            if guess == word:
+                print("CONGRATULATIONS!")
+                tries = 0
+            if guess != word:
+                print("Sorry, the answer was", word)
+                tries = 0
+                guessloop = 0
+            newgame = input("Would you like to play again? Y/N")
+            if newgame.lower() == "n":
+                game = 0
+
+input("Thanks for playing! (hit enter to exit)")

@@ -1,0 +1,15 @@
+#Write a program that counts for the user. Let the user enter the starting number
+# the ending number, and the amount by which to count.
+
+
+#Create a starting number
+start = int(input("What number would you like to start your range?"))
+#Create an ending number
+finish = int(input("What number would you like to end your range?"))
+finish += 1
+#Create an integer by which to count
+increment = int(input("By how much would you like to count?"))
+
+#Compute
+for i in range(start, finish, increment):
+    print(i)

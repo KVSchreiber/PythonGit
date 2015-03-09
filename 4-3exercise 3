@@ -1,0 +1,87 @@
+# Improve word jumble so that each word is paired with a hint.
+# The player should be able to see the hint if he or she is stuck.
+# Add a scoring system that rewards players who solve a jumble without asking for a hint.
+
+# Word Jumble
+#
+# The computer picks a random word and then "jumbles" it
+# The player has to guess the original word
+
+import random
+
+# create a sequence of words to choose from
+WORDS = ("Kevin", "Charlie", "Erina", "Bill", "Impossible", "book")
+# pick one word randomly from the sequence
+word = random.choice(WORDS)
+# create a variable to use later to see if the guess is correct
+correct = word
+if word == "Kevin":
+    hint = "The guy that wrote this"
+if word == "Charlie":
+    hint = "The dog in the room"
+if word == "Erina":
+    hint = "My waifu~"
+if word == "Bill":
+    hint = "My favorite fish"
+if word == "Impossible":
+    hint = "You'll never get this one, it's ________"
+if word == "book":
+    hint = "It can be opened and closed, but you can't go through it"
+
+counter = int(0)
+hinted = 0
+guesses = 0
+
+# create a jumbled version of the word
+jumble =""
+while word:
+    position = random.randrange(len(word))
+    jumble += word[position]
+    word = word[:position] + word[(position + 1):]
+
+# start the game
+print(
+"""
+           Welcome to Word Jumble!
+
+   Unscramble the letters to make a word.
+(Press the enter key at the prompt to quit.)
+     (Type "hint" to get a free hint.)
+"""
+)
+print("The jumble is:", jumble)
+
+guess = input("\nYour guess: ")
+if guess == "hint":
+    print(hint)
+    hinted = 1
+    guess= input("Your guess: ")
+while guess != correct:
+    if guess == "hint":
+        print(hint)
+        hinted = 1
+        guess = input("Your guess: ")
+        if guess == correct:
+            break
+    print("Sorry, that's not it.")
+    guesses += 1
+    guess = input("Your guess: ")
+
+if guess == correct:
+    guesses += 1
+    print("That's it!  You guessed it!\n")
+print("It took you", guesses,"guesses.")
+if not hinted:
+    score = (11-guesses)
+    print("Because you didn't use any hints, your score is",score,"/10", end=".")
+if hinted:
+    score = (11-(2*guesses))
+    print("Because you used a hint, your score is", score, "/10", end=".")
+
+print("Thanks for playing.")
+
+input("\n\nPress the enter key to exit.")
+
+
+
+
